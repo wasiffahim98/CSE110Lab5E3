@@ -23,10 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.buttonPlay).setOnClickListener(v -> mediaPlayer.start());
         findViewById(R.id.buttonPause).setOnClickListener(v -> mediaPlayer.pause());
-        findViewById(R.id.buttonReset).setOnClickListener(v -> {
-            mediaPlayer.reset();
-            loadMedia(MEDIA_RES_ID);
-        });
+        findViewById(R.id.buttonReset).setOnClickListener(v -> loadMedia(MEDIA_RES_ID));
     }
 
     public void loadMedia(int resourceId) {
@@ -39,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         AssetFileDescriptor assetFileDescriptor = this.getResources().openRawResourceFd(resourceId);
 
         try {
+            mediaPlayer.reset();
             mediaPlayer.setDataSource(assetFileDescriptor);
             mediaPlayer.prepareAsync();
         } catch (IOException e) {
